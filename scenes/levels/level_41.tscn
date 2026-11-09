@@ -889,6 +889,6 @@ position = Vector2(756, 252)
 position = Vector2(864, 252)
 
 [node name="LevelExit_0" parent="." instance=ExtResource("15_exit")]
-position = Vector2(1386, 162)
+position = Vector2(1386, 171)
 
 [node name="Enemies" type="Node2D" parent="."]

@@ -7,7 +7,8 @@ var is_activated: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	flag_sprite.position.y = 4.0 # start lowered
+	flag_sprite.position = Vector2(0, -4) # start lowered
+	flag_sprite.modulate = Color(0.6, 0.6, 0.6, 0.8)
 
 func _on_body_entered(body: Node2D) -> void:
 	if is_activated or not body.is_in_group("player"):
@@ -28,7 +29,8 @@ func activate() -> void:
 	
 	# Raise flag animation
 	var tween = create_tween()
-	tween.tween_property(flag_sprite, "position:y", -6.0, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(flag_sprite, "position:y", -18.0, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(flag_sprite, "modulate", Color(1, 1, 1, 1), 0.3)
 
 func _spawn_popup(txt: String) -> void:
 	var ft_scene = load("res://scenes/effects/floating_text.tscn")

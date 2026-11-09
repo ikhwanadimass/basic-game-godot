@@ -981,10 +981,10 @@ position = Vector2(1816, 252)
 position = Vector2(1852, 252)
 
 [node name="Checkpoint_0" parent="." instance=ExtResource("14_chk")]
-position = Vector2(1600, 162)
+position = Vector2(1600, 171)
 
 [node name="LevelExit_0" parent="." instance=ExtResource("15_exit")]
-position = Vector2(2122, 162)
+position = Vector2(2122, 171)
 
 [node name="Enemies" type="Node2D" parent="."]
 

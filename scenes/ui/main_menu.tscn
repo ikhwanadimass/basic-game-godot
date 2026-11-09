@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene format=3 uid="uid://cgv8s44k8y3kh"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://asset/Tiles/Characters/tile_0000.png" id="2_hero0"]
-[ext_resource type="Texture2D" path="res://asset/Tiles/Characters/tile_0004.png" id="3_hero1"]
-[ext_resource type="Texture2D" path="res://asset/Tiles/Characters/tile_0002.png" id="4_hero2"]
-[ext_resource type="Texture2D" path="res://asset/Tiles/Characters/tile_0006.png" id="5_hero3"]
+[ext_resource type="Script" uid="uid://1wkmu75w667t" path="res://scripts/ui/main_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://xp4wq7n7bmke" path="res://asset/Tiles/Characters/tile_0000.png" id="2_hero0"]
+[ext_resource type="Texture2D" uid="uid://xuxm3p3a6w0g" path="res://asset/Tiles/Characters/tile_0004.png" id="3_hero1"]
+[ext_resource type="Texture2D" uid="uid://bbiirdwcey3rt" path="res://asset/Tiles/Characters/tile_0002.png" id="4_hero2"]
+[ext_resource type="Texture2D" uid="uid://dc3sufiav6stc" path="res://asset/Tiles/Characters/tile_0006.png" id="5_hero3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.12, 0.15, 0.25, 1)
@@ -21,7 +21,7 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=832400502]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=114643869]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 
-[node name="TitleBox" type="VBoxContainer" parent="."]
+[node name="TitleBox" type="VBoxContainer" parent="." unique_id=215112381]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -49,25 +49,25 @@ grow_horizontal = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="TitleBox"]
+[node name="TitleLabel" type="Label" parent="TitleBox" unique_id=1408460502]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 20
-text = "CHRONO PIXEL ADVENTURE"
+text = "Basic Obs"
 horizontal_alignment = 1
 
-[node name="SubTitleLabel" type="Label" parent="TitleBox"]
+[node name="SubTitleLabel" type="Label" parent="TitleBox" unique_id=1511150580]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 9
-text = "A RETRO ACTION PLATFORMER • 50 EXPANSIVE LEVELS"
+text = "By Ikhwan Adimas"
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1214556277]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,12 +76,12 @@ offset_top = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainButtons" type="VBoxContainer" parent="CenterContainer"]
+[node name="MainButtons" type="VBoxContainer" parent="CenterContainer" unique_id=324963563]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="HeroPreview" type="TextureRect" parent="CenterContainer/MainButtons"]
+[node name="HeroPreview" type="TextureRect" parent="CenterContainer/MainButtons" unique_id=773321665]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -89,32 +89,32 @@ texture = ExtResource("2_hero0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlayButton" type="Button" parent="CenterContainer/MainButtons"]
+[node name="PlayButton" type="Button" parent="CenterContainer/MainButtons" unique_id=1737708928]
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
 text = "START ADVENTURE"
 
-[node name="LevelsButton" type="Button" parent="CenterContainer/MainButtons"]
+[node name="LevelsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=684410076]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "SELECT LEVEL (1 - 50)"
 
-[node name="CharactersButton" type="Button" parent="CenterContainer/MainButtons"]
+[node name="CharactersButton" type="Button" parent="CenterContainer/MainButtons" unique_id=33169970]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "CHOOSE HERO"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/MainButtons"]
+[node name="SettingsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=2050495921]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "SETTINGS"
 
-[node name="ControlsButton" type="Button" parent="CenterContainer/MainButtons"]
+[node name="ControlsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=138722296]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "HOW TO PLAY"
 
-[node name="Modals" type="Control" parent="."]
+[node name="Modals" type="Control" parent="." unique_id=807775851]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,7 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LevelSelectPanel" type="Panel" parent="Modals"]
+[node name="LevelSelectPanel" type="Panel" parent="Modals" unique_id=1347495962]
 visible = false
 custom_minimum_size = Vector2(360, 220)
 layout_mode = 1
@@ -136,7 +136,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="Modals/LevelSelectPanel"]
+[node name="VBox" type="VBoxContainer" parent="Modals/LevelSelectPanel" unique_id=1593696382]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,31 +149,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="Modals/LevelSelectPanel/VBox"]
+[node name="Title" type="Label" parent="Modals/LevelSelectPanel/VBox" unique_id=954943250]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "SELECT LEVEL (1 - 50)"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Modals/LevelSelectPanel/VBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Modals/LevelSelectPanel/VBox" unique_id=1762091960]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="LevelsGrid" type="GridContainer" parent="Modals/LevelSelectPanel/VBox/ScrollContainer"]
+[node name="LevelsGrid" type="GridContainer" parent="Modals/LevelSelectPanel/VBox/ScrollContainer" unique_id=1085695346]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 5
 
-[node name="CloseLevelsBtn" type="Button" parent="Modals/LevelSelectPanel/VBox"]
+[node name="CloseLevelsBtn" type="Button" parent="Modals/LevelSelectPanel/VBox" unique_id=782421413]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "BACK"
 
-[node name="CharacterSelectPanel" type="Panel" parent="Modals"]
+[node name="CharacterSelectPanel" type="Panel" parent="Modals" unique_id=2039874156]
 visible = false
 custom_minimum_size = Vector2(250, 140)
 layout_mode = 1
@@ -186,7 +186,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="Modals/CharacterSelectPanel"]
+[node name="VBox" type="VBoxContainer" parent="Modals/CharacterSelectPanel" unique_id=1239981519]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,51 +199,51 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Modals/CharacterSelectPanel/VBox"]
+[node name="Title" type="Label" parent="Modals/CharacterSelectPanel/VBox" unique_id=1592400427]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "CHOOSE YOUR HERO"
 horizontal_alignment = 1
 
-[node name="CharsHBox" type="HBoxContainer" parent="Modals/CharacterSelectPanel/VBox"]
+[node name="CharsHBox" type="HBoxContainer" parent="Modals/CharacterSelectPanel/VBox" unique_id=202711622]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Char0Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox"]
+[node name="Char0Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1812452950]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 icon = ExtResource("2_hero0")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Char1Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox"]
+[node name="Char1Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=2112063778]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 icon = ExtResource("3_hero1")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Char2Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox"]
+[node name="Char2Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1513097760]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 icon = ExtResource("4_hero2")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Char3Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox"]
+[node name="Char3Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1071638744]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 icon = ExtResource("5_hero3")
 icon_alignment = 1
 expand_icon = true
 
-[node name="CloseCharsBtn" type="Button" parent="Modals/CharacterSelectPanel/VBox"]
+[node name="CloseCharsBtn" type="Button" parent="Modals/CharacterSelectPanel/VBox" unique_id=1576528650]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "CONFIRM"
 
-[node name="SettingsPanel" type="Panel" parent="Modals"]
+[node name="SettingsPanel" type="Panel" parent="Modals" unique_id=580835945]
 visible = false
 custom_minimum_size = Vector2(220, 160)
 layout_mode = 1
@@ -256,7 +256,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="Modals/SettingsPanel"]
+[node name="VBox" type="VBoxContainer" parent="Modals/SettingsPanel" unique_id=2105355097]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -269,64 +269,64 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
 
-[node name="Title" type="Label" parent="Modals/SettingsPanel/VBox"]
+[node name="Title" type="Label" parent="Modals/SettingsPanel/VBox" unique_id=1080571692]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="MusicHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox"]
+[node name="MusicHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox" unique_id=1326845386]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/MusicHBox"]
+[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/MusicHBox" unique_id=140738452]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "Music:"
 
-[node name="MusicSlider" type="HSlider" parent="Modals/SettingsPanel/VBox/MusicHBox"]
+[node name="MusicSlider" type="HSlider" parent="Modals/SettingsPanel/VBox/MusicHBox" unique_id=1731390095]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 80.0
 
-[node name="SfxHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox"]
+[node name="SfxHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox" unique_id=999176905]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/SfxHBox"]
+[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/SfxHBox" unique_id=95620456]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "SFX:"
 
-[node name="SfxSlider" type="HSlider" parent="Modals/SettingsPanel/VBox/SfxHBox"]
+[node name="SfxSlider" type="HSlider" parent="Modals/SettingsPanel/VBox/SfxHBox" unique_id=315706168]
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
 
-[node name="ShakeHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox"]
+[node name="ShakeHBox" type="HBoxContainer" parent="Modals/SettingsPanel/VBox" unique_id=487251715]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/ShakeHBox"]
+[node name="Label" type="Label" parent="Modals/SettingsPanel/VBox/ShakeHBox" unique_id=1228466033]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "Screen Shake:"
 
-[node name="ShakeCheck" type="CheckBox" parent="Modals/SettingsPanel/VBox/ShakeHBox"]
+[node name="ShakeCheck" type="CheckBox" parent="Modals/SettingsPanel/VBox/ShakeHBox" unique_id=1122266024]
 layout_mode = 2
 button_pressed = true
 
-[node name="FullscreenBtn" type="Button" parent="Modals/SettingsPanel/VBox"]
+[node name="FullscreenBtn" type="Button" parent="Modals/SettingsPanel/VBox" unique_id=1737828643]
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "TOGGLE FULLSCREEN"
 
-[node name="CloseSettingsBtn" type="Button" parent="Modals/SettingsPanel/VBox"]
+[node name="CloseSettingsBtn" type="Button" parent="Modals/SettingsPanel/VBox" unique_id=213162643]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "BACK"
 
-[node name="ControlsPanel" type="Panel" parent="Modals"]
+[node name="ControlsPanel" type="Panel" parent="Modals" unique_id=1807746607]
 visible = false
 custom_minimum_size = Vector2(250, 160)
 layout_mode = 1
@@ -339,7 +339,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBox" type="VBoxContainer" parent="Modals/ControlsPanel"]
+[node name="VBox" type="VBoxContainer" parent="Modals/ControlsPanel" unique_id=70059786]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -352,13 +352,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="Title" type="Label" parent="Modals/ControlsPanel/VBox"]
+[node name="Title" type="Label" parent="Modals/ControlsPanel/VBox" unique_id=691569621]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "HOW TO PLAY"
 horizontal_alignment = 1
 
-[node name="InfoLabel" type="Label" parent="Modals/ControlsPanel/VBox"]
+[node name="InfoLabel" type="Label" parent="Modals/ControlsPanel/VBox" unique_id=894983479]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "• Move: A/D or Left/Right Arrows / D-Pad
@@ -370,7 +370,20 @@ text = "• Move: A/D or Left/Right Arrows / D-Pad
 • Find all 3 Hidden Gems in each of the 50 levels!"
 horizontal_alignment = 1
 
-[node name="CloseControlsBtn" type="Button" parent="Modals/ControlsPanel/VBox"]
+[node name="CloseControlsBtn" type="Button" parent="Modals/ControlsPanel/VBox" unique_id=907235840]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "GOT IT!"
+
+[node name="SubTitleLabel2" type="Label" parent="." unique_id=393956266]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 248.0
+offset_right = 474.0
+offset_bottom = 261.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 6
+text = "https://github.com/ikhwanadimass"
+horizontal_alignment = 1

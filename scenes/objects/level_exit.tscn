@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" path="res://asset/Tiles/tile_0111.png" id="3_flag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
-size = Vector2(20, 32)
+size = Vector2(20, 36)
 
 [node name="LevelExit" type="Area2D"]
 collision_layer = 0
@@ -16,9 +16,9 @@ script = ExtResource("1_script")
 texture = ExtResource("2_pole")
 
 [node name="FlagSprite" type="Sprite2D" parent="."]
-position = Vector2(8, -6)
+position = Vector2(0, -18)
 texture = ExtResource("3_flag")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 0)
+position = Vector2(4, -9)
 shape = SubResource("RectangleShape2D_exit")

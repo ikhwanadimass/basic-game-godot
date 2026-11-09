@@ -1184,10 +1184,10 @@ move_offset = Vector2(90.0, 0.0)
 position = Vector2(954, 252)
 
 [node name="Checkpoint_0" parent="." instance=ExtResource("14_chk")]
-position = Vector2(792, 126)
+position = Vector2(792, 135)
 
 [node name="LevelExit_0" parent="." instance=ExtResource("15_exit")]
-position = Vector2(1674, 162)
+position = Vector2(1674, 171)
 
 [node name="Enemies" type="Node2D" parent="."]
 

@@ -386,7 +386,7 @@ def generate_all_50_levels():
 
                 # Checkpoint around middle
                 if not has_checkpoint_placed and curr_x > level_w * 0.45:
-                    checkpoints.append((curr_x + 36, plat_y - 18))
+                    checkpoints.append((curr_x + 36, plat_y - 9))
                     has_checkpoint_placed = True
                     # Gem 1 near checkpoint
                     if len(gems) == 1:
@@ -419,7 +419,7 @@ def generate_all_50_levels():
         hearts.append((goal_x + 36, 162))
         coins.append((goal_x + 72, 162))
         coins.append((goal_x + 108, 162))
-        exits.append((goal_x + (goal_w - 3) * 18, 162))
+        exits.append((goal_x + (goal_w - 3) * 18, 171))
 
         # Ensure Gem 0 and 1 are present if missed
         if len(gems) < 2:
