@@ -1,0 +1,1110 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/level_base.gd" id="1_lvl"]
+[ext_resource type="PackedScene" path="res://scenes/camera/game_camera.tscn" id="2_cam"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/objects/coin.tscn" id="5_coin"]
+[ext_resource type="PackedScene" path="res://scenes/objects/gem.tscn" id="6_gem"]
+[ext_resource type="PackedScene" path="res://scenes/objects/heart.tscn" id="7_heart"]
+[ext_resource type="PackedScene" path="res://scenes/objects/key.tscn" id="8_key"]
+[ext_resource type="PackedScene" path="res://scenes/objects/door.tscn" id="9_door"]
+[ext_resource type="PackedScene" path="res://scenes/objects/spring.tscn" id="10_spring"]
+[ext_resource type="PackedScene" path="res://scenes/objects/falling_platform.tscn" id="11_fall"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="12_move"]
+[ext_resource type="PackedScene" path="res://scenes/objects/spikes.tscn" id="13_spk"]
+[ext_resource type="PackedScene" path="res://scenes/objects/checkpoint.tscn" id="14_chk"]
+[ext_resource type="PackedScene" path="res://scenes/objects/level_exit.tscn" id="15_exit"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="16_slime"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/bat.tscn" id="17_bat"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/spike_beetle.tscn" id="18_beetle"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0021.png" id="t_g_left"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0022.png" id="t_g_mid"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0023.png" id="t_g_right"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0024.png" id="t_dirt"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0048.png" id="t_s_left"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0049.png" id="t_s_mid"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0050.png" id="t_s_right"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0051.png" id="t_stone"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0008.png" id="t_wood"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_0"]
+size = Vector2(144, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_1"]
+size = Vector2(144, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_2"]
+size = Vector2(90, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_3"]
+size = Vector2(162, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_4"]
+size = Vector2(72, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_5"]
+size = Vector2(108, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_6"]
+size = Vector2(72, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_7"]
+size = Vector2(108, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_8"]
+size = Vector2(144, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plat_9"]
+size = Vector2(216, 90)
+
+[node name="Level_44" type="Node2D"]
+script = ExtResource("1_lvl")
+level_index = 44
+bgm_track = "boss"
+camera_limit_left = 0
+camera_limit_top = -100
+camera_limit_right = 1700
+camera_limit_bottom = 290
+
+[node name="BackgroundCanvas" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Sky" type="ColorRect" parent="BackgroundCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.06, 0.18, 1)
+
+[node name="GameCamera" parent="." instance=ExtResource("2_cam")]
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+position = Vector2(60, 160)
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="StartFloor" type="StaticBody2D" parent="Terrain"]
+position = Vector2(72.0, 234.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StartFloor"]
+shape = SubResource("RectangleShape2D_plat_0")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-63.0, -27.0)
+texture = ExtResource("t_s_left")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-45.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-27.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-9.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(9.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(27.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_6" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(45.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_7" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(63.0, -27.0)
+texture = ExtResource("t_s_right")
+
+[node name="Tile_1_0" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-63.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_1" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-45.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_2" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-27.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_3" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-9.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_4" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(9.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_5" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(27.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_6" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(45.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_7" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(63.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_0" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-63.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_1" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-45.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_2" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-27.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_3" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-9.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_4" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(9.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_5" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(27.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_6" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(45.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_7" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(63.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_0" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-63.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_1" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-45.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_2" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-27.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_3" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(-9.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_4" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(9.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_5" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(27.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_6" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(45.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_7" type="Sprite2D" parent="Terrain/StartFloor"]
+position = Vector2(63.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Plat_1" type="StaticBody2D" parent="Terrain"]
+position = Vector2(270.0, 153.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_1"]
+shape = SubResource("RectangleShape2D_plat_1")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(-63.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(-45.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_6" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(45.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_7" type="Sprite2D" parent="Terrain/Plat_1"]
+position = Vector2(63.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Plat_2" type="StaticBody2D" parent="Terrain"]
+position = Vector2(459.0, 153.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_2"]
+shape = SubResource("RectangleShape2D_plat_2")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_2"]
+position = Vector2(-36.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_2"]
+position = Vector2(-18.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_2"]
+position = Vector2(0.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_2"]
+position = Vector2(18.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_2"]
+position = Vector2(36.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Plat_3" type="StaticBody2D" parent="Terrain"]
+position = Vector2(657.0, 234.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_3"]
+shape = SubResource("RectangleShape2D_plat_3")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-72.0, -27.0)
+texture = ExtResource("t_s_left")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-54.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-36.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-18.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(0.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(18.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_6" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(36.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_7" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(54.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_8" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(72.0, -27.0)
+texture = ExtResource("t_s_right")
+
+[node name="Tile_1_0" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-72.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_1" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-54.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_2" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-36.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_3" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-18.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_4" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(0.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_5" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(18.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_6" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(36.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_7" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(54.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_8" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(72.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_0" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-72.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_1" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-54.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_2" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-36.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_3" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-18.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_4" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(0.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_5" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(18.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_6" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(36.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_7" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(54.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_8" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(72.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_0" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-72.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_1" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-54.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_2" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-36.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_3" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(-18.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_4" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(0.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_5" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(18.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_6" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(36.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_7" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(54.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_8" type="Sprite2D" parent="Terrain/Plat_3"]
+position = Vector2(72.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="HighIsle_3" type="StaticBody2D" parent="Terrain"]
+position = Vector2(630.0, 69.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/HighIsle_3"]
+shape = SubResource("RectangleShape2D_plat_4")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/HighIsle_3"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/HighIsle_3"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/HighIsle_3"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/HighIsle_3"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Plat_4" type="StaticBody2D" parent="Terrain"]
+position = Vector2(864.0, 234.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_4"]
+shape = SubResource("RectangleShape2D_plat_5")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-45.0, -27.0)
+texture = ExtResource("t_s_left")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-27.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-9.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(9.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(27.0, -27.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(45.0, -27.0)
+texture = ExtResource("t_s_right")
+
+[node name="Tile_1_0" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-45.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_1" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-27.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_2" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-9.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_3" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(9.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_4" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(27.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_5" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(45.0, -9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_0" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-45.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_1" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-27.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_2" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-9.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_3" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(9.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_4" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(27.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_5" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(45.0, 9.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_0" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-45.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_1" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-27.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_2" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(-9.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_3" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(9.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_4" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(27.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_5" type="Sprite2D" parent="Terrain/Plat_4"]
+position = Vector2(45.0, 27.0)
+texture = ExtResource("t_stone")
+
+[node name="HighIsle_4" type="StaticBody2D" parent="Terrain"]
+position = Vector2(864.0, 69.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/HighIsle_4"]
+shape = SubResource("RectangleShape2D_plat_6")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/HighIsle_4"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/HighIsle_4"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/HighIsle_4"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/HighIsle_4"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Plat_5" type="StaticBody2D" parent="Terrain"]
+position = Vector2(1044.0, 243.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_5"]
+shape = SubResource("RectangleShape2D_plat_7")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-45.0, -36.0)
+texture = ExtResource("t_s_left")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-27.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-9.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(9.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(27.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(45.0, -36.0)
+texture = ExtResource("t_s_right")
+
+[node name="Tile_1_0" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-45.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_1" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-27.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_2" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-9.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_3" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(9.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_4" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(27.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_5" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(45.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_0" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-45.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_1" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_2" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_3" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_4" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_5" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(45.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_0" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-45.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_1" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-27.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_2" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-9.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_3" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(9.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_4" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(27.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_5" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(45.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_0" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-45.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_1" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-27.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_2" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(-9.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_3" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(9.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_4" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(27.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_5" type="Sprite2D" parent="Terrain/Plat_5"]
+position = Vector2(45.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Plat_6" type="StaticBody2D" parent="Terrain"]
+position = Vector2(1242.0, 153.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Plat_6"]
+shape = SubResource("RectangleShape2D_plat_8")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(-63.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(-45.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_6" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(45.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="Tile_0_7" type="Sprite2D" parent="Terrain/Plat_6"]
+position = Vector2(63.0, 0.0)
+texture = ExtResource("t_wood")
+
+[node name="GoalFloor" type="StaticBody2D" parent="Terrain"]
+position = Vector2(1638.0, 225.0)
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/GoalFloor"]
+shape = SubResource("RectangleShape2D_plat_9")
+
+[node name="Tile_0_0" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-99.0, -36.0)
+texture = ExtResource("t_s_left")
+
+[node name="Tile_0_1" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-81.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_2" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-63.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_3" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-45.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_4" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-27.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_5" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-9.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_6" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(9.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_7" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(27.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_8" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(45.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_9" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(63.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_10" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(81.0, -36.0)
+texture = ExtResource("t_s_mid")
+
+[node name="Tile_0_11" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(99.0, -36.0)
+texture = ExtResource("t_s_right")
+
+[node name="Tile_1_0" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-99.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_1" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-81.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_2" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-63.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_3" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-45.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_4" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-27.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_5" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-9.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_6" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(9.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_7" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(27.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_8" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(45.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_9" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(63.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_10" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(81.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_1_11" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(99.0, -18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_0" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-99.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_1" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-81.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_2" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-63.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_3" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-45.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_4" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-27.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_5" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-9.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_6" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(9.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_7" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(27.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_8" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(45.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_9" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(63.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_10" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(81.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_2_11" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(99.0, 0.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_0" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-99.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_1" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-81.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_2" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-63.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_3" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-45.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_4" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-27.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_5" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-9.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_6" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(9.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_7" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(27.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_8" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(45.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_9" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(63.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_10" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(81.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_3_11" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(99.0, 18.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_0" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-99.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_1" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-81.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_2" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-63.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_3" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-45.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_4" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-27.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_5" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(-9.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_6" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(9.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_7" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(27.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_8" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(45.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_9" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(63.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_10" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(81.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Tile_4_11" type="Sprite2D" parent="Terrain/GoalFloor"]
+position = Vector2(99.0, 36.0)
+texture = ExtResource("t_stone")
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Coin_0" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(216, 126)
+
+[node name="Coin_1" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(252, 126)
+
+[node name="Coin_2" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(288, 126)
+
+[node name="Coin_3" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(432, 126)
+
+[node name="Coin_4" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(468, 126)
+
+[node name="Coin_5" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(846, 42)
+
+[node name="Coin_6" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1008, 180)
+
+[node name="Coin_7" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1044, 180)
+
+[node name="Coin_8" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1188, 126)
+
+[node name="Coin_9" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1224, 126)
+
+[node name="Coin_10" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1260, 126)
+
+[node name="Coin_11" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1602, 162)
+
+[node name="Coin_12" parent="Collectibles" instance=ExtResource("5_coin")]
+position = Vector2(1638, 162)
+
+[node name="Gem_0" parent="Collectibles" instance=ExtResource("6_gem")]
+position = Vector2(612, 40)
+gem_index = 0
+
+[node name="Gem_1" parent="Collectibles" instance=ExtResource("6_gem")]
+position = Vector2(1062, 180)
+gem_index = 1
+
+[node name="Gem_2" parent="Collectibles" instance=ExtResource("6_gem")]
+position = Vector2(1494, 140)
+gem_index = 2
+
+[node name="Heart_0" parent="Collectibles" instance=ExtResource("7_heart")]
+position = Vector2(1566, 162)
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Spring_0" parent="Objects" instance=ExtResource("10_spring")]
+position = Vector2(648, 189)
+
+[node name="Spring_1" parent="Objects" instance=ExtResource("10_spring")]
+position = Vector2(864, 189)
+
+[node name="FallingPlat_0" parent="Objects" instance=ExtResource("11_fall")]
+position = Vector2(1350, 180)
+
+[node name="FallingPlat_1" parent="Objects" instance=ExtResource("11_fall")]
+position = Vector2(1386, 180)
+
+[node name="FallingPlat_2" parent="Objects" instance=ExtResource("11_fall")]
+position = Vector2(1422, 180)
+
+[node name="Hazards" type="Node2D" parent="."]
+
+[node name="Spikes_0" parent="Hazards" instance=ExtResource("13_spk")]
+position = Vector2(1350, 252)
+
+[node name="Spikes_1" parent="Hazards" instance=ExtResource("13_spk")]
+position = Vector2(1386, 252)
+
+[node name="Spikes_2" parent="Hazards" instance=ExtResource("13_spk")]
+position = Vector2(1422, 252)
+
+[node name="Checkpoint_0" parent="." instance=ExtResource("14_chk")]
+position = Vector2(1026, 180)
+
+[node name="LevelExit_0" parent="." instance=ExtResource("15_exit")]
+position = Vector2(1692, 162)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bat_0" parent="Enemies" instance=ExtResource("17_bat")]
+position = Vector2(270, 84)
+
+[node name="SpikeBeetle_0" parent="Enemies" instance=ExtResource("18_beetle")]
+position = Vector2(1242, 126)

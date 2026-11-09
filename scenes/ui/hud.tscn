@@ -1,0 +1,430 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0044.png" id="2_heart"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0151.png" id="3_coin"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0027.png" id="4_key"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0067.png" id="5_gem"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="6_pause"]
+[ext_resource type="Script" path="res://scripts/ui/level_complete.gd" id="7_complete"]
+[ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="8_gameover"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.08, 0.12, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_bg"]
+bg_color = Color(0.15, 0.15, 0.2, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_fg"]
+bg_color = Color(0.9, 0.2, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="LeftSection" type="HBoxContainer" parent="MarginContainer/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeartsContainer" type="HBoxContainer" parent="MarginContainer/TopBar/LeftSection"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Heart1" type="TextureRect" parent="MarginContainer/TopBar/LeftSection/HeartsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="MarginContainer/TopBar/LeftSection/HeartsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="MarginContainer/TopBar/LeftSection/HeartsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("2_heart")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinBox" type="HBoxContainer" parent="MarginContainer/TopBar/LeftSection"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="CoinIcon" type="TextureRect" parent="MarginContainer/TopBar/LeftSection/CoinBox"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("3_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinsLabel" type="Label" parent="MarginContainer/TopBar/LeftSection/CoinBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 11
+text = "0"
+vertical_alignment = 1
+
+[node name="KeyBox" type="HBoxContainer" parent="MarginContainer/TopBar/LeftSection"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="KeyIcon" type="TextureRect" parent="MarginContainer/TopBar/LeftSection/KeyBox"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("4_key")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="KeysLabel" type="Label" parent="MarginContainer/TopBar/LeftSection/KeyBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 11
+text = "0"
+vertical_alignment = 1
+
+[node name="CenterSection" type="BoxContainer" parent="MarginContainer/TopBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="GemsContainer" type="HBoxContainer" parent="MarginContainer/TopBar/CenterSection"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Gem1" type="TextureRect" parent="MarginContainer/TopBar/CenterSection/GemsContainer"]
+modulate = Color(0.3, 0.3, 0.3, 0.4)
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_gem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Gem2" type="TextureRect" parent="MarginContainer/TopBar/CenterSection/GemsContainer"]
+modulate = Color(0.3, 0.3, 0.3, 0.4)
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_gem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Gem3" type="TextureRect" parent="MarginContainer/TopBar/CenterSection/GemsContainer"]
+modulate = Color(0.3, 0.3, 0.3, 0.4)
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+texture = ExtResource("5_gem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightSection" type="BoxContainer" parent="MarginContainer/TopBar"]
+layout_mode = 2
+alignment = 2
+
+[node name="TimerLabel" type="Label" parent="MarginContainer/TopBar/RightSection"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 11
+text = "00:00.0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="BossBarContainer" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -34.0
+offset_right = 100.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="BossNameLabel" type="Label" parent="BossBarContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 9
+text = "THE STONE GUARDIAN"
+horizontal_alignment = 1
+
+[node name="BossProgressBar" type="ProgressBar" parent="BossBarContainer"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_boss_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fg")
+max_value = 6.0
+value = 6.0
+show_percentage = false
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_pause")
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+custom_minimum_size = Vector2(160, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "RESUME"
+
+[node name="RestartButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "RESTART LEVEL"
+
+[node name="MenuButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "MAIN MENU"
+
+[node name="LevelCompleteMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_complete")
+
+[node name="ColorRect" type="ColorRect" parent="LevelCompleteMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="Panel" type="Panel" parent="LevelCompleteMenu"]
+custom_minimum_size = Vector2(200, 160)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelCompleteMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="LevelCompleteMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "LEVEL COMPLETE!"
+horizontal_alignment = 1
+
+[node name="StarsContainer" type="HBoxContainer" parent="LevelCompleteMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="LevelCompleteMenu/Panel/VBoxContainer/StarsContainer"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("3_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="LevelCompleteMenu/Panel/VBoxContainer/StarsContainer"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("3_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="LevelCompleteMenu/Panel/VBoxContainer/StarsContainer"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("3_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatsLabel" type="Label" parent="LevelCompleteMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Time: 00:00.0
+Coins: 0
+Gems: 0/3"
+horizontal_alignment = 1
+
+[node name="ButtonsHBox" type="HBoxContainer" parent="LevelCompleteMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="ReplayButton" type="Button" parent="LevelCompleteMenu/Panel/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "REPLAY"
+
+[node name="NextButton" type="Button" parent="LevelCompleteMenu/Panel/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "NEXT LEVEL"
+
+[node name="MenuButton" type="Button" parent="LevelCompleteMenu/Panel/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "MENU"
+
+[node name="GameOverMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_gameover")
+
+[node name="ColorRect" type="ColorRect" parent="GameOverMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0, 0, 0.7)
+
+[node name="Panel" type="Panel" parent="GameOverMenu"]
+custom_minimum_size = Vector2(170, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="GameOverMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 14
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RespawnButton" type="Button" parent="GameOverMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "RESPAWN AT CHECKPOINT"
+
+[node name="RestartButton" type="Button" parent="GameOverMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "RESTART LEVEL"
+
+[node name="MenuButton" type="Button" parent="GameOverMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "MAIN MENU"

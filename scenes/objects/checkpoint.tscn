@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/objects/checkpoint.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0131.png" id="2_pole"]
+[ext_resource type="Texture2D" path="res://asset/Tiles/tile_0111.png" id="3_flag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_check"]
+size = Vector2(16, 24)
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_script")
+
+[node name="PoleSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_pole")
+
+[node name="FlagSprite" type="Sprite2D" parent="."]
+position = Vector2(8, 4)
+texture = ExtResource("3_flag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_check")
