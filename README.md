@@ -1,12 +1,12 @@
-# Chrono Pixel Adventure 🎮
+# Basic Obs
 
 Game 2D Platformer Action-Adventure lengkap dan siap produksi (**Production-Ready**) yang dibangun di atas **Godot Engine 4** menggunakan aset resmi Kenney Pixel Platformer, kini telah diperluas hingga **50 Level Penuh**!
 
 ---
 
-## 🌟 Fitur Utama & Struktur 50 Level
+## Fitur Utama & Struktur 50 Level
 
-### 🗺️ 5 Dunia / Bioma Berbeda (50 Levels Campaign)
+###  5 Dunia / Bioma Berbeda (50 Levels Campaign)
 Setiap 10 level memiliki atmosfer, tingkat kesulitan, palet warna, dan rintangan yang berkembang secara progresif:
 1. **World 1: Verdant Meadows (Level 1 – 10)**
    - *Tema*: Padang rumput hijau cerah & langit biru.
@@ -31,7 +31,7 @@ Setiap 10 level memiliki atmosfer, tingkat kesulitan, palet warna, dan rintangan
 
 ---
 
-### 💎 Total Konten & Koleksi
+###  Total Konten & Koleksi
 - **50 Level Unik**: Masing-masing memiliki layout rintangan tersendiri dan checkpoint.
 - **150 Hidden Secret Gems**: 3 permata tersembunyi di setiap level untuk tantangan 100% completionist (meraih ⭐⭐⭐ di setiap level).
 - **Ratusan Koin Emas**: Dapat dikumpulkan untuk mencetak skor tertinggi (*High Score*).
@@ -39,7 +39,7 @@ Setiap 10 level memiliki atmosfer, tingkat kesulitan, palet warna, dan rintangan
 
 ---
 
-### 🕹️ Kontrol Permainan
+###  Kontrol Permainan
 
 | Aksi | Keyboard | Gamepad (Controller) |
 |---|---|---|
@@ -52,7 +52,7 @@ Setiap 10 level memiliki atmosfer, tingkat kesulitan, palet warna, dan rintangan
 
 ---
 
-### 🚀 Cara Menjalankan
+###  Cara Menjalankan
 
 1. Buka aplikasi **Godot Engine 4** (atau reload project).
 2. Tekan tombol **F5** (atau klik tombol **Play ▶** di pojok kanan atas).
