@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xuxm3p3a6w0g" path="res://asset/Tiles/Characters/tile_0004.png" id="3_hero1"]
 [ext_resource type="Texture2D" uid="uid://bbiirdwcey3rt" path="res://asset/Tiles/Characters/tile_0002.png" id="4_hero2"]
 [ext_resource type="Texture2D" uid="uid://dc3sufiav6stc" path="res://asset/Tiles/Characters/tile_0006.png" id="5_hero3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/shop_menu.tscn" id="6_shop"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.12, 0.15, 0.25, 1)
@@ -43,18 +44,18 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 18.0
-offset_bottom = 60.0
+offset_top = 8.0
+offset_bottom = 42.0
 grow_horizontal = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 1
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="TitleBox" unique_id=1408460502]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 20
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
 text = "Basic Obs"
 horizontal_alignment = 1
 
@@ -63,7 +64,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.85, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 8
 text = "By Ikhwan Adimas"
 horizontal_alignment = 1
 
@@ -72,17 +73,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 40.0
+offset_top = 38.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainButtons" type="VBoxContainer" parent="CenterContainer" unique_id=324963563]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 3
 
 [node name="HeroPreview" type="TextureRect" parent="CenterContainer/MainButtons" unique_id=773321665]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("2_hero0")
@@ -90,28 +92,33 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="PlayButton" type="Button" parent="CenterContainer/MainButtons" unique_id=1737708928]
+custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 10
 text = "START ADVENTURE"
 
 [node name="LevelsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=684410076]
+custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 9
 text = "SELECT LEVEL (1 - 50)"
 
-[node name="CharactersButton" type="Button" parent="CenterContainer/MainButtons" unique_id=33169970]
+[node name="ShopButton" type="Button" parent="CenterContainer/MainButtons" unique_id=987654321]
+custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "CHOOSE HERO"
+theme_override_font_sizes/font_size = 9
+text = "ITEM SHOP"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=2050495921]
+custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 9
 text = "SETTINGS"
 
 [node name="ControlsButton" type="Button" parent="CenterContainer/MainButtons" unique_id=138722296]
+custom_minimum_size = Vector2(150, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 9
 text = "HOW TO PLAY"
 
 [node name="Modals" type="Control" parent="." unique_id=807775851]
@@ -156,10 +163,11 @@ text = "SELECT LEVEL (1 - 50)"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Modals/LevelSelectPanel/VBox" unique_id=1762091960]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
+follow_focus = true
 
 [node name="LevelsGrid" type="GridContainer" parent="Modals/LevelSelectPanel/VBox/ScrollContainer" unique_id=1085695346]
 layout_mode = 2
@@ -172,76 +180,6 @@ columns = 5
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "BACK"
-
-[node name="CharacterSelectPanel" type="Panel" parent="Modals" unique_id=2039874156]
-visible = false
-custom_minimum_size = Vector2(250, 140)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
-
-[node name="VBox" type="VBoxContainer" parent="Modals/CharacterSelectPanel" unique_id=1239981519]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 10.0
-offset_right = -12.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
-
-[node name="Title" type="Label" parent="Modals/CharacterSelectPanel/VBox" unique_id=1592400427]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "CHOOSE YOUR HERO"
-horizontal_alignment = 1
-
-[node name="CharsHBox" type="HBoxContainer" parent="Modals/CharacterSelectPanel/VBox" unique_id=202711622]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="Char0Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1812452950]
-custom_minimum_size = Vector2(46, 46)
-layout_mode = 2
-icon = ExtResource("2_hero0")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Char1Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=2112063778]
-custom_minimum_size = Vector2(46, 46)
-layout_mode = 2
-icon = ExtResource("3_hero1")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Char2Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1513097760]
-custom_minimum_size = Vector2(46, 46)
-layout_mode = 2
-icon = ExtResource("4_hero2")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Char3Btn" type="Button" parent="Modals/CharacterSelectPanel/VBox/CharsHBox" unique_id=1071638744]
-custom_minimum_size = Vector2(46, 46)
-layout_mode = 2
-icon = ExtResource("5_hero3")
-icon_alignment = 1
-expand_icon = true
-
-[node name="CloseCharsBtn" type="Button" parent="Modals/CharacterSelectPanel/VBox" unique_id=1576528650]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "CONFIRM"
 
 [node name="SettingsPanel" type="Panel" parent="Modals" unique_id=580835945]
 visible = false
@@ -375,15 +313,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "GOT IT!"
 
+[node name="ShopMenu" parent="Modals" instance=ExtResource("6_shop")]
+visible = false
+
 [node name="SubTitleLabel2" type="Label" parent="." unique_id=393956266]
-layout_mode = 0
-offset_left = -6.0
-offset_top = 248.0
-offset_right = 474.0
-offset_bottom = 261.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.65, 0.78, 0.92, 0.8)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 7
 text = "https://github.com/ikhwanadimass"
 horizontal_alignment = 1
+vertical_alignment = 1

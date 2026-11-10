@@ -46,7 +46,7 @@ level_index = 35
 bgm_track = "level"
 camera_limit_left = 0
 camera_limit_top = -100
-camera_limit_right = 1800
+camera_limit_right = 1884
 camera_limit_bottom = 290
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="."]

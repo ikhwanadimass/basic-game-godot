@@ -6,12 +6,20 @@ extends Control
 @onready var next_btn: Button = $Panel/VBoxContainer/ButtonsHBox/NextButton
 @onready var replay_btn: Button = $Panel/VBoxContainer/ButtonsHBox/ReplayButton
 @onready var menu_btn: Button = $Panel/VBoxContainer/ButtonsHBox/MenuButton
+@onready var shop_btn: Button = $Panel/VBoxContainer/ButtonsHBox/ShopButton
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	next_btn.pressed.connect(_on_next_pressed)
 	replay_btn.pressed.connect(_on_replay_pressed)
 	menu_btn.pressed.connect(_on_menu_pressed)
+	if shop_btn:
+		shop_btn.pressed.connect(_on_shop_pressed)
+
+func _on_shop_pressed() -> void:
+	var hud = get_parent()
+	if hud and hud.has_node("ShopMenu"):
+		hud.get_node("ShopMenu").open()
 
 func setup_stats(stats: Dictionary) -> void:
 	var stars = stats.get("stars", 1)
@@ -57,6 +65,8 @@ func _on_replay_pressed() -> void:
 		gm.start_level(gm.current_level_index)
 
 func _on_menu_pressed() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
 	if has_node("/root/ScreenTransition"):
 		get_node("/root/ScreenTransition").change_scene_to_file("res://scenes/ui/main_menu.tscn")
 	else:

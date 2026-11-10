@@ -183,6 +183,15 @@ func die() -> void:
 	hurt_box.set_deferred("monitoring", false)
 	hit_box.set_deferred("monitoring", false)
 	
+	# Despawn any minions and protect player during victory sequence
+	var minions = get_tree().get_nodes_in_group("enemy")
+	for m in minions:
+		if m != self and is_instance_valid(m):
+			m.queue_free()
+	var player = get_tree().get_first_node_in_group("player")
+	if player and is_instance_valid(player) and "is_invulnerable" in player:
+		player.is_invulnerable = true
+	
 	var gm = get_node_or_null("/root/GameManager")
 	if gm:
 		gm.emit_signal("boss_defeated")
@@ -208,7 +217,11 @@ func die() -> void:
 	)
 
 func _spawn_trophy_and_win() -> void:
-	# Show level exit or level complete screen
-	var hud = get_tree().get_first_node_in_group("hud")
-	if hud and hud.has_method("show_victory"):
-		hud.show_victory()
+	# Complete boss level and trigger victory / level complete flow
+	var lvl = get_tree().get_first_node_in_group("level")
+	if lvl and lvl.has_method("on_level_completed"):
+		lvl.on_level_completed()
+	else:
+		var hud = get_tree().get_first_node_in_group("hud")
+		if hud and hud.has_method("show_level_complete"):
+			hud.show_level_complete()

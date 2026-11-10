@@ -37,12 +37,24 @@ var is_invulnerable: bool = false
 var is_dead: bool = false
 var facing_direction: int = 1 # 1 = right, -1 = left
 
-# Character Skin Textures: 0=Green, 1=Pink, 2=Blue, 3=Yellow
+# Upgrades & Attributes
+var effective_speed: float = SPEED
+var effective_jump_velocity: float = JUMP_VELOCITY
+var effective_double_jump_velocity: float = DOUBLE_JUMP_VELOCITY
+var effective_dash_cooldown: float = DASH_COOLDOWN
+var max_midair_jumps: int = 1
+var midair_jumps_left: int = 1
+var dash_has_iframe: bool = false
+var has_shield: bool = false
+var has_shockwave: bool = false
+
+# Character Skin Textures: 0=Green, 1=Pink, 2=Blue, 3=Yellow, 4=Shadow Ninja
 const SKIN_TEXTURES = {
 	0: ["res://asset/Tiles/Characters/tile_0000.png", "res://asset/Tiles/Characters/tile_0001.png"],
 	1: ["res://asset/Tiles/Characters/tile_0004.png", "res://asset/Tiles/Characters/tile_0005.png"],
 	2: ["res://asset/Tiles/Characters/tile_0002.png", "res://asset/Tiles/Characters/tile_0003.png"],
-	3: ["res://asset/Tiles/Characters/tile_0006.png", "res://asset/Tiles/Characters/tile_0007.png"]
+	3: ["res://asset/Tiles/Characters/tile_0006.png", "res://asset/Tiles/Characters/tile_0007.png"],
+	4: ["res://asset/Tiles/Characters/tile_0008.png", "res://asset/Tiles/Characters/tile_0009.png"]
 }
 
 # Node References
@@ -64,8 +76,31 @@ func _ready() -> void:
 	hit_box.area_entered.connect(_on_hit_box_entered)
 	
 	var gm = get_node_or_null("/root/GameManager")
-	if gm and gm.has_checkpoint:
-		global_position = gm.checkpoint_position
+	if gm:
+		var speed_lvl = gm.get_upgrade_level("speed_level")
+		effective_speed = SPEED * (1.0 + speed_lvl * 0.15)
+		
+		var jump_lvl = gm.get_upgrade_level("jump_level")
+		effective_jump_velocity = JUMP_VELOCITY * (1.0 + jump_lvl * 0.08)
+		effective_double_jump_velocity = DOUBLE_JUMP_VELOCITY * (1.0 + jump_lvl * 0.08)
+		
+		var dash_lvl = gm.get_upgrade_level("dash_level")
+		effective_dash_cooldown = maxf(0.22, DASH_COOLDOWN - dash_lvl * 0.12)
+		dash_has_iframe = (dash_lvl > 0)
+		
+		max_midair_jumps = 2 if gm.has_upgrade("triple_jump") else 1
+		midair_jumps_left = max_midair_jumps
+		has_shield = gm.has_upgrade("guardian_shield")
+		has_shockwave = gm.has_upgrade("shockwave_slam")
+		
+		if gm.has_upgrade("skeleton_key") and gm.keys == 0:
+			gm.add_key()
+			
+		if gm.has_upgrade("checkpoint_charm") and not gm.has_checkpoint:
+			gm.set_checkpoint(global_position)
+		
+		if gm.has_checkpoint:
+			global_position = gm.checkpoint_position
 
 func _apply_skin() -> void:
 	var skin_idx = 0
@@ -93,6 +128,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME
 		can_double_jump = true
+		midair_jumps_left = max_midair_jumps
 		if is_slamming:
 			_land_slam()
 	else:
@@ -130,6 +166,7 @@ func _physics_process(delta: float) -> void:
 		if is_wall_sliding:
 			velocity.y = minf(velocity.y + applied_gravity * delta, WALL_SLIDE_SPEED)
 			can_double_jump = true
+			midair_jumps_left = max_midair_jumps
 			dust_particles.emitting = true
 		elif is_slamming:
 			velocity.y = SLAM_SPEED
@@ -139,12 +176,12 @@ func _physics_process(delta: float) -> void:
 	# Jump Execution
 	if jump_buffer_timer > 0.0:
 		if coyote_timer > 0.0:
-			_execute_jump(JUMP_VELOCITY)
+			_execute_jump(effective_jump_velocity)
 		elif is_on_wall_only():
 			_execute_wall_jump()
-		elif can_double_jump:
-			can_double_jump = false
-			_execute_jump(DOUBLE_JUMP_VELOCITY, true)
+		elif midair_jumps_left > 0:
+			midair_jumps_left -= 1
+			_execute_jump(effective_double_jump_velocity, true)
 
 	# Variable Jump Height
 	if Input.is_action_just_released("jump") and velocity.y < 0.0:
@@ -153,7 +190,7 @@ func _physics_process(delta: float) -> void:
 	# Horizontal Movement
 	var input_x = Input.get_axis("move_left", "move_right")
 	if input_x != 0.0:
-		velocity.x = move_toward(velocity.x, input_x * SPEED, ACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, input_x * effective_speed, ACCELERATION * delta)
 		facing_direction = 1 if input_x > 0 else -1
 		sprite.flip_h = (facing_direction == -1)
 	else:
@@ -202,7 +239,9 @@ func _execute_wall_jump() -> void:
 func _start_dash() -> void:
 	is_dashing = true
 	dash_timer = DASH_DURATION
-	dash_cooldown_timer = DASH_COOLDOWN
+	dash_cooldown_timer = effective_dash_cooldown
+	if dash_has_iframe:
+		is_invulnerable = true
 	
 	var input_vec = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
 	if input_vec == Vector2.ZERO:
@@ -232,7 +271,9 @@ func _process_dash(delta: float) -> void:
 		
 	if dash_timer <= 0.0:
 		is_dashing = false
-		velocity = dash_direction * (SPEED * 0.8)
+		if dash_has_iframe:
+			is_invulnerable = false
+		velocity = dash_direction * (effective_speed * 0.8)
 
 func _start_slam() -> void:
 	is_slamming = true
@@ -251,6 +292,27 @@ func _land_slam() -> void:
 	var gm = get_node_or_null("/root/GameManager")
 	if gm:
 		gm.trigger_screen_shake(6.0, 0.25)
+		
+	if has_shockwave:
+		_trigger_slam_shockwave()
+
+func _trigger_slam_shockwave() -> void:
+	_spawn_floating_text("SHOCKWAVE!", Color(1.0, 0.6, 0.2))
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	for e in enemies:
+		if is_instance_valid(e) and e != self:
+			var d = global_position.distance_to(e.global_position)
+			if d < 85.0:
+				if e.has_method("take_damage"):
+					e.take_damage(2)
+
+func _spawn_floating_text(txt: String, col: Color = Color.WHITE) -> void:
+	var ft_scene = load("res://scenes/effects/floating_text.tscn")
+	if ft_scene:
+		var ft = ft_scene.instantiate()
+		ft.global_position = global_position + Vector2(0, -18)
+		get_parent().add_child(ft)
+		ft.setup(txt, col)
 
 func _spawn_ghost_trail() -> void:
 	var ghost = Sprite2D.new()
@@ -309,6 +371,23 @@ func take_damage(amount: int = 1, knockback_source: Vector2 = Vector2.ZERO) -> v
 	if is_invulnerable or is_dead:
 		return
 		
+	# Guardian Shield absorption (absorbs standard hit, but not instant-kill pit falls > 90)
+	if has_shield and amount < 90:
+		has_shield = false
+		var am_s = get_node_or_null("/root/AudioManager")
+		if am_s:
+			am_s.play_sfx("door")
+		var gm_s = get_node_or_null("/root/GameManager")
+		if gm_s:
+			gm_s.trigger_screen_shake(6.0, 0.25)
+		_spawn_floating_text("SHIELD BLOCKED!", Color.GOLD)
+		is_invulnerable = true
+		var tween_s = create_tween().set_loops(4)
+		tween_s.tween_property(sprite, "modulate", Color(2.0, 2.0, 0.5, 1.0), 0.08)
+		tween_s.tween_property(sprite, "modulate", Color.WHITE, 0.08)
+		tween_s.chain().tween_callback(func(): is_invulnerable = false; sprite.modulate = Color.WHITE)
+		return
+
 	var gm = get_node_or_null("/root/GameManager")
 	if not gm:
 		return

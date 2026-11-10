@@ -427,6 +427,10 @@ def generate_all_50_levels():
         if len(gems) < 3:
             gems.insert(1, (level_w // 2, 140, 1))
 
+        # Ensure camera_limit_right fully encompasses the GoalFloor and exit with padding
+        actual_max_x = goal_x + goal_w * 18 + 120
+        cam_limits[2] = max(cam_limits[2], actual_max_x)
+
         create_level_scene(
             filename, lvl, bg_col, bgm,
             cam_limits,

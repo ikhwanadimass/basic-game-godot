@@ -58,7 +58,7 @@ level_index = 45
 bgm_track = "boss"
 camera_limit_left = 0
 camera_limit_top = -100
-camera_limit_right = 1800
+camera_limit_right = 2170
 camera_limit_bottom = 290
 
 [node name="BackgroundCanvas" type="CanvasLayer" parent="."]

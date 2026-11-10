@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="6_pause"]
 [ext_resource type="Script" path="res://scripts/ui/level_complete.gd" id="7_complete"]
 [ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="8_gameover"]
+[ext_resource type="PackedScene" path="res://scenes/ui/shop_menu.tscn" id="9_shop"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.08, 0.08, 0.12, 0.85)
@@ -213,7 +214,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
 [node name="Panel" type="Panel" parent="PauseMenu"]
-custom_minimum_size = Vector2(160, 140)
+custom_minimum_size = Vector2(160, 155)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -253,6 +254,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "RESTART LEVEL"
 
+[node name="ShopButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "ITEM SHOP"
+
 [node name="MenuButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
@@ -278,7 +284,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.65)
 
 [node name="Panel" type="Panel" parent="LevelCompleteMenu"]
-custom_minimum_size = Vector2(200, 160)
+custom_minimum_size = Vector2(230, 160)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -352,6 +358,11 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "REPLAY"
+
+[node name="ShopButton" type="Button" parent="LevelCompleteMenu/Panel/VBoxContainer/ButtonsHBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "SHOP"
 
 [node name="NextButton" type="Button" parent="LevelCompleteMenu/Panel/VBoxContainer/ButtonsHBox"]
 layout_mode = 2
@@ -428,3 +439,6 @@ text = "RESTART LEVEL"
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "MAIN MENU"
+
+[node name="ShopMenu" parent="." instance=ExtResource("9_shop")]
+visible = false

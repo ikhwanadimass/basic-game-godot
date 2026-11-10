@@ -2,6 +2,7 @@ extends Control
 
 @onready var resume_btn: Button = $Panel/VBoxContainer/ResumeButton
 @onready var restart_btn: Button = $Panel/VBoxContainer/RestartButton
+@onready var shop_btn: Button = $Panel/VBoxContainer/ShopButton
 @onready var menu_btn: Button = $Panel/VBoxContainer/MenuButton
 
 func _ready() -> void:
@@ -9,6 +10,13 @@ func _ready() -> void:
 	resume_btn.pressed.connect(_on_resume_pressed)
 	restart_btn.pressed.connect(_on_restart_pressed)
 	menu_btn.pressed.connect(_on_menu_pressed)
+	if shop_btn:
+		shop_btn.pressed.connect(_on_shop_pressed)
+
+func _on_shop_pressed() -> void:
+	var hud = get_parent()
+	if hud and hud.has_node("ShopMenu"):
+		hud.get_node("ShopMenu").open()
 
 func _on_resume_pressed() -> void:
 	get_tree().paused = false

@@ -5,6 +5,8 @@ extends Control
 @onready var menu_btn: Button = $VBoxContainer/MenuButton
 
 func _ready() -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
 	var am = get_node_or_null("/root/AudioManager")
 	if am:
 		am.play_music("title")
@@ -13,7 +15,7 @@ func _ready() -> void:
 	var total_score = gm.score if gm else 0
 	var total_coins = gm.coins if gm else 0
 	
-	stats_label.text = "You defeated The Stone Guardian!\n\nFinal Score: %d\nTotal Coins: %d" % [total_score, total_coins]
+	stats_label.text = "CONGRATULATIONS!\nYou conquered all 50 levels and defeated the Eternal Core Boss!\n\nFinal Score: %d\nTotal Coins: %d" % [total_score, total_coins]
 	
 	play_again_btn.pressed.connect(_on_play_again_pressed)
 	menu_btn.pressed.connect(_on_menu_pressed)

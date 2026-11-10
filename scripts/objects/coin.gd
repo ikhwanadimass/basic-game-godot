@@ -36,8 +36,15 @@ func _process(delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if player and is_instance_valid(player):
 		var dist = global_position.distance_to(player.global_position)
-		if dist < MAGNET_DISTANCE:
-			global_position = global_position.move_toward(player.global_position, 180.0 * delta)
+		var magnet_range = MAGNET_DISTANCE
+		var magnet_speed = 180.0
+		var gm = get_node_or_null("/root/GameManager")
+		if gm:
+			var m_lvl = gm.get_upgrade_level("magnet_level")
+			magnet_range += m_lvl * 55.0
+			magnet_speed += m_lvl * 80.0
+		if dist < magnet_range:
+			global_position = global_position.move_toward(player.global_position, magnet_speed * delta)
 
 func _on_body_entered(body: Node2D) -> void:
 	if is_collected or not body.is_in_group("player"):

@@ -23,6 +23,8 @@ signal boss_health_changed(current_hp: int, max_hp: int)
 signal boss_defeated()
 @warning_ignore("unused_signal")
 signal screen_shake_requested(intensity: float, duration: float)
+@warning_ignore("unused_signal")
+signal upgrade_purchased(upgrade_id: String)
 
 # Player Stats
 var max_health: int = 3
@@ -32,7 +34,23 @@ var score: int = 0
 var keys: int = 0
 var current_level_gems: Array[bool] = [false, false, false]
 
-# Character Selection: 0 = Green, 1 = Pink, 2 = Blue, 3 = Yellow
+# Shop Upgrades System
+var shop_upgrades: Dictionary = {
+	"health_level": 0,
+	"speed_level": 0,
+	"jump_level": 0,
+	"dash_level": 0,
+	"magnet_level": 0,
+	"midas_touch": false,
+	"triple_jump": false,
+	"shockwave_slam": false,
+	"guardian_shield": false,
+	"skeleton_key": false,
+	"checkpoint_charm": false,
+	"unlocked_skins": [0, 1, 2, 3]
+}
+
+# Character Selection: 0 = Green, 1 = Pink, 2 = Blue, 3 = Yellow, 4 = Shadow Ninja
 var selected_character: int = 0
 
 # Checkpoint system
@@ -121,6 +139,8 @@ func get_level_scene_path(level_idx: int) -> String:
 	return "res://scenes/levels/level_%d.tscn" % level_idx
 
 func start_level(level_idx: int) -> void:
+	get_tree().paused = false
+	Engine.time_scale = 1.0
 	current_level_index = clampi(level_idx, 1, MAX_LEVELS)
 	health = max_health
 	keys = 0
@@ -146,9 +166,53 @@ func reset_level_stats() -> void:
 	for i in range(3):
 		emit_signal("gems_changed", i, false)
 
+func get_upgrade_level(key: String) -> int:
+	return shop_upgrades.get(key, 0)
+
+func has_upgrade(key: String) -> bool:
+	return shop_upgrades.get(key, false) == true
+
+func get_effective_max_health() -> int:
+	return 3 + get_upgrade_level("health_level")
+
+func buy_upgrade(key: String, cost: int, is_tiered: bool = false, max_tier: int = 3) -> bool:
+	if coins < cost:
+		return false
+	coins -= cost
+	if is_tiered:
+		shop_upgrades[key] = mini(max_tier, get_upgrade_level(key) + 1)
+		if key == "health_level":
+			max_health = get_effective_max_health()
+			health = max_health
+			emit_signal("health_changed", health, max_health)
+	else:
+		shop_upgrades[key] = true
+	save_game()
+	emit_signal("coins_changed", coins)
+	emit_signal("upgrade_purchased", key)
+	return true
+
+func buy_skin(skin_id: int, cost: int) -> bool:
+	var skins: Array = shop_upgrades.get("unlocked_skins", [0, 1, 2, 3])
+	if skins.has(skin_id):
+		selected_character = skin_id
+		save_game()
+		return true
+	if coins < cost:
+		return false
+	coins -= cost
+	skins.append(skin_id)
+	shop_upgrades["unlocked_skins"] = skins
+	selected_character = skin_id
+	save_game()
+	emit_signal("coins_changed", coins)
+	return true
+
 func add_coins(amount: int) -> void:
-	coins += amount
-	score += amount * 10
+	var multiplier = 2 if has_upgrade("midas_touch") else 1
+	var total_added = amount * multiplier
+	coins += total_added
+	score += total_added * 10
 	emit_signal("coins_changed", coins)
 	emit_signal("score_changed", score)
 
@@ -238,7 +302,8 @@ func save_game() -> void:
 		"level_records": level_records,
 		"sfx_volume": sfx_volume,
 		"music_volume": music_volume,
-		"screen_shake_enabled": screen_shake_enabled
+		"screen_shake_enabled": screen_shake_enabled,
+		"shop_upgrades": shop_upgrades
 	}
 	var file = FileAccess.open("user://savegame.json", FileAccess.WRITE)
 	if file:
@@ -259,7 +324,7 @@ func load_game() -> void:
 			var data = json.data
 			if data is Dictionary:
 				max_unlocked_level = data.get("max_unlocked_level", 1)
-				selected_character = data.get("selected_character", 0)
+				selected_character = clampi(data.get("selected_character", 0), 0, 4)
 				coins = data.get("coins", 0)
 				score = data.get("score", 0)
 				sfx_volume = data.get("sfx_volume", 1.0)
@@ -269,3 +334,9 @@ func load_game() -> void:
 				for k in saved_recs.keys():
 					var key_int = int(k)
 					level_records[key_int] = saved_recs[k]
+				var saved_shop = data.get("shop_upgrades", {})
+				if saved_shop is Dictionary:
+					for k in saved_shop.keys():
+						shop_upgrades[k] = saved_shop[k]
+				max_health = get_effective_max_health()
+				health = max_health

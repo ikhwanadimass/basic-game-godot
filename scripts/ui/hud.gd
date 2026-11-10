@@ -61,6 +61,15 @@ func _update_all(gm: Node) -> void:
 		_on_gems_changed(i, gm.current_level_gems[i])
 
 func _on_health_changed(cur_hp: int, max_hp: int) -> void:
+	while hearts_container.get_child_count() < max_hp:
+		var new_heart = TextureRect.new()
+		new_heart.custom_minimum_size = Vector2(16, 16)
+		new_heart.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		new_heart.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		hearts_container.add_child(new_heart)
+	while hearts_container.get_child_count() > max_hp:
+		hearts_container.get_child(hearts_container.get_child_count() - 1).queue_free()
+
 	var hearts = hearts_container.get_children()
 	for i in range(hearts.size()):
 		var heart_rect = hearts[i] as TextureRect
